@@ -5,6 +5,7 @@ const router = new Router()
 //引入模型对象进行CRUD
 const usersModel = require('../model/users')
 const {resolve} = require('path')
+let sha1 = require('sha1')
 router.post('/register', (req, res) => {
     //1获取用户的输入
     /*
@@ -61,7 +62,7 @@ router.post('/register', (req, res) => {
             res.render('haha/register',{errMsg})
             return
         }
-        usersModel.create({ email, nick_name, password, re_password }, (err, data) => {
+        usersModel.create({ email, nick_name, password:sha1(password), re_password }, (err, data) => {
             if (!err) {
                 res.redirect(`/login?email=${email}`)
                 console.log(`用户${email}注册成功`)
@@ -94,7 +95,7 @@ router.post('/login', (req, res) => {
         return 
     }
     //3去数据库中查找（1）有结果登录成功(2)无结果登陆失败
-    usersModel.findOne({email,password},(err,data) => {
+    usersModel.findOne({email,password:sha1(password)},(err,data) => {
         if(err) {
             errMsg.newWorkErr = '网路不稳定稍后重试'
             console.log(err)

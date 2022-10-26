@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>原生js_get</title>
+</head>
+<body>
+    <h1>该页面是测试原生js发送get请求</h1>
+    <button id="btn">点我发送请求</button>
+
+
+    <script>
+        //使用js发送ajax_get请求
+        /*
+            1实例化XMLHttpRequest对象---找来一个帮你发请求的人
+            2绑定一个名为onreadystatechange事件监听---和发请求的人约定好成功做什么，失败做什么
+            3调用Open方法---给谁发？用什么方法发？带什么过去？
+            4调用send方法---发送请求
+        */
+       let btn = document.querySelector('#btn')
+       btn.addEventListener('click',() => {
+             //1
+            const xhr =new XMLHttpRequest()
+            //2
+            xhr.onreadystatechange = () => {
+                    if(xhr.readyState === 4 && status === 200) {
+                        console.log(xhr.response)
+                    }
+            }
+                //3
+            xhr.open('get','http://localhost:3000/ajax_get?name=kobe&age=18')
+            //4
+            xhr.send()
+       })
+      
+    </script>
+</body>
+</html>

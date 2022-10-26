@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!--
+        ejs语法：
+           1 <%%> 里面能写任意js代码，但不会向浏览器输出任何的东西
+           2 <%- %>能够将后端传递过来对象指定的key所对应的value渲染到页面,它可以渲染标签，不转译
+           3 <%= %>能够将后端传递过来对象指定的key所对应的value渲染到页面,不渲染标签，它转译
+    -->
+    <h1>我是ejs页面</h1>
+    <!-- <div>< %-data% ></div>
+    <div>< %=data% ></div> -->
+<%
+    for(let i =0;i<persons.length;i++){
+        let item = persons[i] %>
+        <ul>
+            <li>姓名:<%=item.name%></li></li>
+            <li>年龄:<%=item.age%></li></li>
+        </ul>
+    <%}%>
+</body>
+</html>
